@@ -7,9 +7,9 @@ A sample Spring Boot 3 and Infinispan integration.
 
 ## Starting Infinispan
 ```
-$ docker pull infinispan/server:latest
+$ docker pull infinispan/server:14.0.2.Final
 
-$ docker run -p 11222:11222 infinispan/server
+$ docker run -p 11222:11222 -e USER="admin" -e PASS="password" infinispan/server:14.0.2.Final
 ```
 
 ## Infinispan Configuration
