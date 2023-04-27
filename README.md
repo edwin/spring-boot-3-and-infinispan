@@ -13,32 +13,22 @@ $ docker run -p 11222:11222 infinispan/server
 ```
 
 ## Infinispan Configuration
-We are using below XML configuration for setting up Infinispan cache for a 5 minutes session timeout.
-```json
-{
-  "user-cache": {
-    "distributed-cache": {
-      "owners": "1",
-      "mode": "SYNC",
-      "statistics": true,
-      "encoding": {
-        "key": {
-          "media-type":"application/x-java-serialized-object"
-        },
-        "value": {
-          "media-type": "application/x-java-serialized-object"
-        }
-      },
-      "locking": {
-        "isolation": "REPEATABLE_READ"
-      },
-      "expiration": {
-        "lifespan": "-1",
-        "max-idle": "300000"
-      }
-    }
-  }
-}
+We are using below XML configuration for setting up Infinispan cache with an index.
+```xml
+<?xml version="1.0"?>
+<distributed-cache name="user-cache" owners="1" mode="SYNC" statistics="true">
+    <encoding>
+        <key media-type="application/x-protostream"/>
+        <value media-type="application/x-protostream"/>
+    </encoding>
+    <locking isolation="REPEATABLE_READ"/>
+    <memory storage="OFF_HEAP"/>
+    <indexing enabled="true">
+        <indexed-entities>
+            <indexed-entity>user.User</indexed-entity>
+        </indexed-entities>
+    </indexing>
+</distributed-cache>
 ```
 
 ## How to Test
@@ -51,5 +41,11 @@ $ curl -kv http://localhost:8080/add-user?name=lele&age=14&address=Jogja
 Get the data from a cache store
 ```
 $ curl -kv http://localhost:8080/get-user?name=lele
+{"name":"lele","age":14,"address":"Jogja"} 
+```
+
+Find cities using Fuzzy search. For this sample, we are using the word `Jogjon`, but application is able to give `Jogja` as result. 
+```
+$ curl -kv "http://localhost:8080/find-address?address=Jogjon
 {"name":"lele","age":14,"address":"Jogja"} 
 ```

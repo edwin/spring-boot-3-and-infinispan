@@ -37,14 +37,16 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- infinispan -->
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.infinispan</groupId>
@@ -54,28 +56,16 @@
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-remote-query-client</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.infinispan.protostream</groupId>
             <artifactId>protostream-processor</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.infinispan.protostream</groupId>
-            <artifactId>protostream-processor</artifactId>
-            <version>${version.protostream}</version>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-client-hotrod</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
