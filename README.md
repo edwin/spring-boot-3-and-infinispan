@@ -46,6 +46,6 @@ $ curl -kv http://localhost:8080/get-user?name=lele
 
 Find Address using Fuzzy search. For this sample, we are using the word `Jogjon`, but application is able to give `Jogja` as result. 
 ```
-$ curl -kv "http://localhost:8080/find-address?address=Jogjon
+$ curl -kv http://localhost:8080/find-address?address=Jogjon
 {"name":"lele","age":14,"address":"Jogja"} 
 ```
